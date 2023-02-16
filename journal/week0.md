@@ -2,14 +2,14 @@
 
 ## Required Homework & Tasks
 
-### *Recreate Logical Architectural Deisgn*
+### Recreate Logical Architectural Deisgn
 The first task is to recreate the logical architecture design from the previous week. This is a good way to get familiar with the tools and the process. The design should be recreated in Lucid Chart. I based my design on the one Andrew Brown was using in his tutorial
 
 [Link to the design](https://lucid.app/lucidchart/b23df7f5-fcac-4476-be9e-339885627b98/edit?viewport_loc=240,-238,2525,1631,0_0&invitationId=inv_474f3ff7-4010-4e24-8ae8-aa1c2bd49b66)
 
 ![Logical Architecture Screenshot](//journal/assets/napkin-design.png)
 
-### *Create a new User and Generate AWS Credentials*
+### Create a new User and Generate AWS Credentials
 The second task is to create a new user called **aws-bootcamp** and generate AWS credentials. Also created a new IAM group called **AWS-Bootcamp** and added the new user to the group. The group has the following permissions:
 - ##### AdministratorAccess
 
@@ -47,7 +47,7 @@ tasks:
       cd $THEIA_WORKSPACE_ROOT
 ```
 
-### Set Env Vars
+#### *Set Env Vars*
 
 Set these credentials for the current bash terminal
 ```
@@ -63,11 +63,31 @@ gp env AWS_SECRET_ACCESS_KEY=""
 gp env AWS_DEFAULT_REGION=us-east-1
 ```
 
-### Check that the AWS CLI is working and you are the expected user
+#### *Check that the AWS CLI is working and you are the expected user*
 
 ```sh
 aws sts get-caller-identity
 ```
 
-You should see something like this:
+We see something like this from Gitpod terminal:
 ![Confirmation of AWS CLI and user account](//journal/assets/aws-cli.png)
+
+### Creating a Billing Alarm
+In this section we are to use the AWS CloudShell service to create a billing alarm. The alarm will be set to trigger when the total cost of the account exceeds $1.00. The alarm will be sent to an SNS topic that we will create.
+#### *Creating a Simple Notification Service (SNS) Topic*
+A Simple Notification Service (SNS) topic is a messaging service that allows you to send messages to subscribers. We will create a topic called **AWS-Bill-Alert** and subscribe our email address to the topic. We will use this topic to send notifications when the billing alarm is triggered.
+
+We create the topic using the AWS CLI
+```sh
+aws sns create-topic --name AWS-Bill-Alert
+aws sns subscribe \
+    --topic-arn TopicARN \
+    --protocol email \
+    --notification-endpoint your@email.com
+```
+
+![SNS Topic](//journal/assets/sns-topic.png)
+
+#### *Added Verification of working SNS Topic*
+![SNS Topic Verification](//journal/assets/sns-topic-verification.png)
+
