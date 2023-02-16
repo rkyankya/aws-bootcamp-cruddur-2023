@@ -77,7 +77,7 @@ In this section we are to use the AWS CloudShell service to create a billing ala
 #### *Creating a Simple Notification Service (SNS) Topic*
 A Simple Notification Service (SNS) topic is a messaging service that allows you to send messages to subscribers. We will create a topic called **AWS-Bill-Alert** and subscribe our email address to the topic. We will use this topic to send notifications when the billing alarm is triggered.
 
-We create the topic using the AWS CLI
+We create the topic using the AWS CLI v2
 ```sh
 aws sns create-topic --name AWS-Bill-Alert
 aws sns subscribe \
@@ -88,6 +88,33 @@ aws sns subscribe \
 
 ![SNS Topic](//journal/assets/sns-topic.png)
 
+More References to [AWS CLI version 2 SNS](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sns/index.html)
 #### *Added Verification of working SNS Topic*
 ![SNS Topic Verification](//journal/assets/sns-topic-verification.png)
 
+#### *Creating a Budget*
+I had to first create two Json files. One for the budget information and then ohter containing the notification information. I used the AWS CLI v2 to create the budget and then the notification.
+
+First I created the budget json file. It contains the basic Budget configurations
+![Budget Json](//journal/assets/budget-json.png)
+
+Then created the notification json file. It contains the alarm configuration on when to take action when a given threshold is meat
+![Notification Json](//journal/assets/notification-json.png)
+
+Then I used the following command to get the Budget up and running
+
+```sh
+aws budgets create-budget \
+    --account-id AccountID \
+    --budget file://budget.json \
+    --notifications-with-subscribers file://notification-budget.json
+```
+
+##### AWS CLI v2 Budget Verification
+![Budget Verification](//journal/assets/budget-verification.png)
+
+##### Console Verification
+![Budget Console](//journal/assets/budget-console.png)
+
+Useful References for AWS CLI v2 Budgets Creation
+- [AWS CLI v2 Budgets](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/budgets/create-budget.html#examples)
