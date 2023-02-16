@@ -118,3 +118,13 @@ aws budgets create-budget \
 
 Useful References for AWS CLI v2 Budgets Creation
 - [AWS CLI v2 Budgets](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/budgets/create-budget.html#examples)
+
+
+### Create a Billing Alarm
+In this section we are to use the AWS CloudShell service to create a billing alarm. The alarm will be set to trigger when the total cost of the account exceeds $1.00. The alarm will be sent to an SNS topic that we will create.
+
+Description of the Alarm
+![Bill Json](//journal/assets/bill-json.png)
+
+Verification of existance of the alarm in the console
+![Bill Alarm Console](//journal/assets/bill-alarm-console.png)
