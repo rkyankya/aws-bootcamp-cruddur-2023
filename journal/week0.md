@@ -46,3 +46,28 @@ tasks:
       sudo ./aws/install
       cd $THEIA_WORKSPACE_ROOT
 ```
+
+### Set Env Vars
+
+Set these credentials for the current bash terminal
+```
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+export AWS_DEFAULT_REGION=us-east-1
+```
+
+For Gitpod to remember these credentials if we relaunch our workspaces
+```
+gp env AWS_ACCESS_KEY_ID=""
+gp env AWS_SECRET_ACCESS_KEY=""
+gp env AWS_DEFAULT_REGION=us-east-1
+```
+
+### Check that the AWS CLI is working and you are the expected user
+
+```sh
+aws sts get-caller-identity
+```
+
+You should see something like this:
+![Confirmation of AWS CLI and user account](//journal/assets/aws-cli.png)
