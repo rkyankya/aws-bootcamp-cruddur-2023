@@ -128,3 +128,12 @@ Description of the Alarm
 
 Verification of existance of the alarm in the console
 ![Bill Alarm Console](//journal/assets/bill-alarm-console.png)
+
+
+
+## Homework Challenges
+
+### *EventBridge Hookup Health Dashboard to SNS Topic*
+I had to first create a new SNS topic called **AWS_Health** and subscribe my email address to the topic. Then I had to create a new EventBridge rule that would send a notification to the SNS topic when a new AWS Health event is created.
+
+![EventBridge Rule](//journal/assets/eventbridge-rule.png)
