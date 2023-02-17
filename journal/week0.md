@@ -7,7 +7,7 @@ The first task is to recreate the logical architecture design from the previous 
 
 [Link to the design](https://lucid.app/lucidchart/b23df7f5-fcac-4476-be9e-339885627b98/edit?viewport_loc=240,-238,2525,1631,0_0&invitationId=inv_474f3ff7-4010-4e24-8ae8-aa1c2bd49b66)
 
-![Logical Architecture Screenshot](//journal/assets/napkin-design.png)
+![Logical Architecture Screenshot](assets/napkin-design.png)
 
 ### Create a new User and Generate AWS Credentials
 The second task is to create a new user called **aws-bootcamp** and generate AWS credentials. Also created a new IAM group called **AWS-Bootcamp** and added the new user to the group. The group has the following permissions:
@@ -15,14 +15,14 @@ The second task is to create a new user called **aws-bootcamp** and generate AWS
 
 ##### User Group
 Created User Group called **AWS-Bootcamp** and added the new user to the group with the AdministratorAccess policy.
-![User Group](//journal/assets/user-group.png)
+![User Group](assets/user-group.png)
 ##### User enabled for MFA and Console Access
 Enabled MFA for the *aws-bootcamp* user and enabled console access.
-![MFA and Console Access](//journal/assets/mfa-console-access.png)
+![MFA and Console Access](assets/mfa-console-access.png)
 
 ##### Access Keys
 Generated Access Keys for the *aws-bootcamp* user and downloaded the CSV file.
-![Access Keys](//journal/assets/access-keys.png)
+![Access Keys](assets/access-keys.png)
 
 
 ### Install AWS CLI GitPod
@@ -70,7 +70,7 @@ aws sts get-caller-identity
 ```
 
 We see something like this from Gitpod terminal:
-![Confirmation of AWS CLI and user account](//journal/assets/aws-cli.png)
+![Confirmation of AWS CLI and user account](assets/aws-cli.png)
 
 ### Creating a Billing Alarm
 In this section we are to use the AWS CloudShell service to create a billing alarm. The alarm will be set to trigger when the total cost of the account exceeds $1.00. The alarm will be sent to an SNS topic that we will create.
@@ -86,20 +86,20 @@ aws sns subscribe \
     --notification-endpoint your@email.com
 ```
 
-![SNS Topic](//journal/assets/sns-topic.png)
+![SNS Topic](assets/sns-topic.png)
 
 More References to [AWS CLI version 2 SNS](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sns/index.html)
 #### *Added Verification of working SNS Topic*
-![SNS Topic Verification](//journal/assets/sns-topic-verification.png)
+![SNS Topic Verification](assets/sns-topic-verification.png)
 
 #### *Creating a Budget*
 I had to first create two Json files. One for the budget information and then ohter containing the notification information. I used the AWS CLI v2 to create the budget and then the notification.
 
 First I created the budget json file. It contains the basic Budget configurations
-![Budget Json](//journal/assets/budget-json.png)
+![Budget Json](assets/budget-json.png)
 
 Then created the notification json file. It contains the alarm configuration on when to take action when a given threshold is meat
-![Notification Json](//journal/assets/notification-json.png)
+![Notification Json](assets/notification-json.png)
 
 Then I used the following command to get the Budget up and running
 
@@ -111,10 +111,10 @@ aws budgets create-budget \
 ```
 
 ##### AWS CLI v2 Budget Verification
-![Budget Verification](//journal/assets/budget-verification.png)
+![Budget Verification](assets/budget-verification.png)
 
 ##### Console Verification
-![Budget Console](//journal/assets/budget-console.png)
+![Budget Console](assets/budget-console.png)
 
 Useful References for AWS CLI v2 Budgets Creation
 - [AWS CLI v2 Budgets](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/budgets/create-budget.html#examples)
@@ -124,10 +124,10 @@ Useful References for AWS CLI v2 Budgets Creation
 In this section we are to use the AWS CloudShell service to create a billing alarm. The alarm will be set to trigger when the total cost of the account exceeds $1.00. The alarm will be sent to an SNS topic that we will create.
 
 Description of the Alarm
-![Bill Json](//journal/assets/bill-json.png)
+![Bill Json](assets/bill-json.png)
 
 Verification of existance of the alarm in the console
-![Bill Alarm Console](//journal/assets/bill-alarm-console.png)
+![Bill Alarm Console](assets/bill-alarm-console.png)
 
 
 
@@ -136,9 +136,9 @@ Verification of existance of the alarm in the console
 ### *EventBridge Hookup Health Dashboard to SNS Topic*
 I had to first create a new SNS topic called **AWS_Health** and subscribe my email address to the topic. Then I had to create a new EventBridge rule that would send a notification to the SNS topic when a new AWS Health event is created.
 
-![EventBridge Rule](//journal/assets/eventbridge-rule.png)
+![EventBridge Rule](assets/eventbridge-rule.png)
 
 ### *Request for a service limit*
 I created a support case requesting access to US-East-2 and 1 for use in the AWS Bootcamp.
 
-![Support Case](//journal/assets/support-case.png)
+![Support Case](assets/support-case.png)
