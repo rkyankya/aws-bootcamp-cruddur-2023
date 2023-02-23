@@ -1,8 +1,7 @@
 # Week 1 — App Containerization
 
   ## Homework Challenge
-
-1. ### Install Docker and run application on Local Machine
+### Install Docker and run application on Local Machine
 
 Installed Docker Desktop by following the instructions on the [Docker Desktop Installation Instructions](https://docs.docker.com/get-docker/) page.
 
@@ -21,3 +20,10 @@ Docker images and network were also created as expected.
 Docker Compose was used to run the app.
 ![Docker Compose](assets/docker-comp.png)
 
+### Push and tag a image to DockerHub
+First I created a Docker repository on DockerHub. Then I tagged the image with my DockerHub username/repository:tag and pushed it to DockerHub.
+I set it to public so that anyone can access it.
+
+[Published Docker Image](https://hub.docker.com/repository/docker/rkyankya/aws-bootcamp/general)
+
+![Docker Image](assets/docker-image.png)
