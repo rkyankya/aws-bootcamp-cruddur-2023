@@ -29,4 +29,6 @@ I set it to public so that anyone can access it.
 ![Docker Image](assets/docker-image.png)
 
 ### Multi-stage building for a Dockerfile build
-I used the frontend Dockerfile for this assignment 
+I used the frontend Dockerfile for this assignment. The first stage, named "build", is used to build the application. It starts with the base image of Node.js, copies the application code to the container. The second stage, named "run", is used to run the application. It starts with the smaller Alpine-based Node.js image, copies the built application from the previous stage and runs it.
+
+![Dockerfile](assets/dockerfile-front.svg)
