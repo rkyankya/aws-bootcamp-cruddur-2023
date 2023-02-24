@@ -27,3 +27,6 @@ I set it to public so that anyone can access it.
 [Published Docker Image](https://hub.docker.com/repository/docker/rkyankya/aws-bootcamp/general)
 
 ![Docker Image](assets/docker-image.png)
+
+### Multi-stage building for a Dockerfile build
+I used the frontend Dockerfile for this assignment 
