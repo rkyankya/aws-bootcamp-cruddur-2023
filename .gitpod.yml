@@ -20,6 +20,7 @@ tasks:
       sudo apt update
       sudo apt install -y postgresql-client-13 libpq-dev
       cd $THEIA_WORKSPACE_ROOT
+      pyenv install 3.10.9
       clear
 vscode:
   extensions:
