@@ -28,12 +28,6 @@ Setup of Rollbar Env Vars in Gitpod
 
 ![Rollbar Code Implementation](assets/rollbar-code.svg)
 
-#### Rollbar Error
-
-When testing Rollbar we run the backend and go to /rollbar/test it returns a Hello World message. When we go to /rollbar/error it returns a 500 error. This is what is sent to Rollbar.
-
-![Rollbar Error](assets/rollbar-error.png)
-
 #### Rollbar Docker Compose
 
 Add to backend-flask for `docker-compose.yml`
@@ -43,3 +37,14 @@ Add to backend-flask for `docker-compose.yml`
 ```
 
 ![Rollbar Docker Compose](assets/docker-rollbar.svg)
+
+#### Rollbar Error Reporting
+
+When testing Rollbar we run the backend and go to /rollbar/test it returns a Hello World message. When we go to /rollbar/error it returns a 500 error. This is what is sent to Rollbar.
+
+![Rollbar Error](assets/rollbar-error.png)
+
+#### Reference Links
+
+* [Rollbar](https://rollbar.com/)
+* [Rollbar Flask Example](https://github.com/rollbar/rollbar-flask-example/blob/master/hello.py)
