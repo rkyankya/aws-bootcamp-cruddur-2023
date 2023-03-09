@@ -36,6 +36,9 @@ ports:
     onOpen: open-browser
     name: Frontend 
   - port: 4567
-    name: Backeend
+    name: Backend
     visibility: public
     onOpen: open-browser
+  - port: 2000
+    name: x-ray-daemon
+    visibility: public
