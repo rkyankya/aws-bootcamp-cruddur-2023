@@ -33,3 +33,13 @@ Setup of Rollbar Env Vars in Gitpod
 When testing Rollbar we run the backend and go to /rollbar/test it returns a Hello World message. When we go to /rollbar/error it returns a 500 error. This is what is sent to Rollbar.
 
 ![Rollbar Error](assets/rollbar-error.png)
+
+#### Rollbar Docker Compose
+
+Add to backend-flask for `docker-compose.yml`
+
+```text
+   ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
+```
+
+![Rollbar Docker Compose](assets/docker-rollbar.svg)
