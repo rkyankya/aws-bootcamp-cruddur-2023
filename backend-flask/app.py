@@ -44,8 +44,6 @@ import watchtower
 import logging
 from time import strftime
 
-
-
 app = Flask(__name__)
 
 # HoneyComb -------

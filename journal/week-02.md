@@ -39,7 +39,7 @@ We add the following to the `docker-compose.yml` file
 
 ![HoneyComb Output](assets/honey.png)
 
- Reference Links
+#### Reference Links
 
 * [Honey Comb Website](https://www.honeycomb.io/)
 * [Honey Comb Python](https://docs.honeycomb.io/getting-data-in/python/opentelemetry/)
@@ -97,3 +97,47 @@ When testing Rollbar we run the backend and go to /rollbar/test it returns a Hel
 * [Rollbar Flask Example](https://github.com/rollbar/rollbar-flask-example/blob/master/hello.py)
 
 ---
+
+## AWS X-RAY Implementation
+
+We add the AWS X-Ray library to the `requirements.txt` file
+
+```text
+aws-xray-sdk
+```
+
+We run the following command to install the library
+
+```text
+pip install -r requirements.txt
+```
+
+We add the following code to the `app.py` file
+
+![AWS X-Ray Code](assets/x-ray-app.svg)
+
+#### Setup AWS X-Ray Resources
+
+Add a new `aws/json/x-ray.json`
+![AWS X-Ray JSON](assets/x-ray-json.svg)
+
+#### Add Deamon Service to Docker Compose
+
+We add the following to the `docker-compose.yml` file
+
+![AWS X-Ray Docker Compose](assets/x-ray-docker.svg)
+
+We need to add these two env vars to our backend-flask in our docker-compose.yml file
+
+```text
+  AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
+  AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
+```
+
+#### Reference Links
+
+* [AWS X-Ray Python](https://docs.aws.amazon.com/xray-sdk-for-python/latest/reference/index.html)
+* [Install X-Ray Daemon](https://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html)
+
+* [Github aws-xray-daemon](https://github.com/aws/aws-xray-daemon)
+* [X-Ray Docker Compose example](https://github.com/marjamis/xray/blob/master/docker-compose.yml)
