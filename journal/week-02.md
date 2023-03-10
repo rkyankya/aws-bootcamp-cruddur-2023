@@ -1,5 +1,52 @@
 # Week 2 — Distributed Tracing
 
+## HoneyComb Backend
+
+OpenTelemetry is a set of open source tools and APIs that enables developers to instrument their applications to generate distributed traces and metrics.
+
+We add the HoneyComb library to the `requirements.txt` file
+
+```text
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp-proto-http
+opentelemetry-instrumentation-flask
+opentelemetry-instrumentation-requests
+```
+
+![HoneyComb](assets/honeycomb.png)
+
+Run the pip install command to install the libraries
+
+```text
+pip install -r requirements.txt
+```
+
+We run the following commands to setup the HoneyComb environment variables
+
+```text
+export HONEYCOMB_API_KEY=""
+export HONEYCOMB_SERVICE_NAME="Cruddur"
+gp env HONEYCOMB_API_KEY=""
+gp env HONEYCOMB_SERVICE_NAME="Cruddur"
+```
+
+We add the following to the `docker-compose.yml` file
+
+![HoneyComb Docker Compose](assets/docker-rollbar.svg)
+
+#### Sample HoneyComb Output
+
+![HoneyComb Output](assets/honey.png)
+
+ Reference Links
+
+* [Honey Comb Website](https://www.honeycomb.io/)
+* [Honey Comb Python](https://docs.honeycomb.io/getting-data-in/python/opentelemetry/)
+* [Honey Comb Pricing]( https://www.honeycomb.io/pricing/)
+
+---
+
 ## Rollbar Implementation
 
 For Implementation added blinker and rollbar to the requirements.txt file
@@ -20,7 +67,7 @@ Setup of Rollbar Env Vars in Gitpod
   gp env ROLLBAR_ACCESS_TOKEN=""
   ```
 
-#### Rollbar importation of code
+### Rollbar importation of code
 
 ![Rollbar Code Implementation](assets/import-rollbar.svg)
 
@@ -48,3 +95,5 @@ When testing Rollbar we run the backend and go to /rollbar/test it returns a Hel
 
 * [Rollbar](https://rollbar.com/)
 * [Rollbar Flask Example](https://github.com/rollbar/rollbar-flask-example/blob/master/hello.py)
+
+---
