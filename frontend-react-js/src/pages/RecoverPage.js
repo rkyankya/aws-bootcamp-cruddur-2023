@@ -2,6 +2,7 @@ import './RecoverPage.css';
 import React from "react";
 import {ReactComponent as Logo} from '../components/svg/logo.svg';
 import { Link } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 export default function RecoverPage() {
   // Username is Eamil
@@ -14,12 +15,25 @@ export default function RecoverPage() {
 
   const onsubmit_send_code = async (event) => {
     event.preventDefault();
-    console.log('onsubmit_send_code')
+    // console.log('onsubmit_send_code')
+    setErrors('')
+    Auth.forgotPassword(username)
+    .then((data) => setFormState('confirm_code') )
+    .catch((err) => setErrors(err.message) );
     return false
   }
   const onsubmit_confirm_code = async (event) => {
     event.preventDefault();
-    console.log('onsubmit_confirm_code')
+    // console.log('onsubmit_confirm_code')
+    setErrors('')
+    if (password == passwordAgain){
+      Auth.forgotPasswordSubmit(username, code, password)
+      .then((data) => setFormState('success'))
+      .catch((err) => setErrors(err.message) );
+    } else {
+      // eslint-disable-next-line no-undef
+      setCognitoErrors('Passwords do not match')
+    }
     return false
   }
 
@@ -42,7 +56,7 @@ export default function RecoverPage() {
   }
 
   const send_code = () => {
-    return (<form 
+    return (<form
       className='recover_form'
       onSubmit={onsubmit_send_code}
     >
@@ -53,7 +67,7 @@ export default function RecoverPage() {
           <input
             type="text"
             value={username}
-            onChange={username_onchange} 
+            onChange={username_onchange}
           />
         </div>
       </div>
@@ -67,7 +81,7 @@ export default function RecoverPage() {
   }
 
   const confirm_code = () => {
-    return (<form 
+    return (<form
       className='recover_form'
       onSubmit={onsubmit_confirm_code}
     >
@@ -78,7 +92,7 @@ export default function RecoverPage() {
           <input
             type="text"
             value={code}
-            onChange={code_onchange} 
+            onChange={code_onchange}
           />
         </div>
         <div className='field text_field password'>
@@ -86,7 +100,7 @@ export default function RecoverPage() {
           <input
             type="password"
             value={password}
-            onChange={password_onchange} 
+            onChange={password_onchange}
           />
         </div>
         <div className='field text_field password_again'>
@@ -94,7 +108,7 @@ export default function RecoverPage() {
           <input
             type="password"
             value={passwordAgain}
-            onChange={password_again_onchange} 
+            onChange={password_again_onchange}
           />
         </div>
       </div>
