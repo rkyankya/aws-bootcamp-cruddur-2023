@@ -19,9 +19,7 @@ tasks:
       echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
       sudo apt update
       sudo apt install -y postgresql-client-13 libpq-dev
-      cd $THEIA_WORKSPACE_ROOT
-      pyenv install 3.10.9
-      pyenv global 3.10.9
+      cd $THEIA_WORKSPACE_ROOT 
       clear
     command: |
       export GITPOD_IP=$(curl ifconfig.me)
