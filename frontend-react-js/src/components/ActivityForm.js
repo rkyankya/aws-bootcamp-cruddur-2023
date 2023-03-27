@@ -58,7 +58,7 @@ export default function ActivityForm(props) {
 
   if (props.popped === true) {
     return (
-      <form
+      <form 
         className='activity_form'
         onSubmit={onsubmit}
       >
@@ -66,7 +66,7 @@ export default function ActivityForm(props) {
           type="text"
           placeholder="what would you like to say?"
           value={message}
-          onChange={textarea_onchange}
+          onChange={textarea_onchange} 
         />
         <div className='submit'>
           <div className={classes.join(' ')}>{240-count}</div>
@@ -75,7 +75,7 @@ export default function ActivityForm(props) {
             <BombIcon className='icon' />
             <select
               value={ttl}
-              onChange={ttl_onchange}
+              onChange={ttl_onchange} 
             >
               <option value='30-days'>30 days</option>
               <option value='7-days'>7 days</option>
