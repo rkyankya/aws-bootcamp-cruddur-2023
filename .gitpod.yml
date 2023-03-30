@@ -45,3 +45,7 @@ ports:
   - port: 2000
     name: x-ray-daemon
     visibility: public
+  - port: 5432
+    visibility: public
+    name: Database
+
