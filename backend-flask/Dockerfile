@@ -1,23 +1,15 @@
-# Base image
-FROM python:3.10-slim-buster
+FROM python:3.9-alpine 
 
-# Set the working directory
 WORKDIR /backend-flask
 
-# Copy the requirements file
 COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
-# Install the requirements
-RUN pip3 install -r requirements.txt
-
-# Copy the rest of the files
 COPY . .
 
-# Set the environment variables
 ENV FLASK_ENV=development
 
-# Expose the port
-EXPOSE ${port}
-
-# Run the app
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=4567"]
+#this is metadata only and won't actually expose a port.
+EXPOSE 4567
+# CMD ["gunicorn", "-b", ":4567", "app:app"]
+CMD [ "flask", "run", "--host=0.0.0.0", "--port=4567"]
