@@ -3,7 +3,7 @@ import React from "react";
 import {ReactComponent as Logo} from '../components/svg/logo.svg';
 import { Link } from "react-router-dom";
 
-// [TODO] Authenication
+// Authenication
 import { Auth } from 'aws-amplify';
 
 export default function SigninPage() {
@@ -11,6 +11,16 @@ export default function SigninPage() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [errors, setErrors] = React.useState('');
+
+
+  // Get email from the signup page where we stored the email in localStorage
+  React.useEffect(() => {
+    const storedEmail = localStorage.getItem('email');
+    if (storedEmail) {
+      setEmail(storedEmail);
+      localStorage.removeItem('email'); // Remove the email from local storage
+    }
+  }, []);
 
   const onsubmit = async (event) => {
     setErrors('')

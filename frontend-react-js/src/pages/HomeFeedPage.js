@@ -1,16 +1,16 @@
 import './HomeFeedPage.css';
 import React from "react";
 
-import DesktopNavigation from '../components/DesktopNavigation';
-import DesktopSidebar from '../components/DesktopSidebar';
+// Authenication
+import checkAuth from '../lib/CheckAuth';
+
+import DesktopNavigation  from '../components/DesktopNavigation';
+import DesktopSidebar     from '../components/DesktopSidebar';
 import ActivityFeed from '../components/ActivityFeed';
 import ActivityForm from '../components/ActivityForm';
 import ReplyForm from '../components/ReplyForm';
 
-import { Auth } from 'aws-amplify';
-
-// [TODO] Authenication
-import Cookies from 'js-cookie'
+import { trace, context, } from '@opentelemetry/api';
 
 export default function HomeFeedPage() {
   const [activities, setActivities] = React.useState([]);
@@ -21,6 +21,8 @@ export default function HomeFeedPage() {
   const dataFetchedRef = React.useRef(false);
 
   const loadData = async () => {
+    console.log(process.env.REACT_APP_BACKEND_URL);
+    console.log("Checking if REACT_APP_BACKEND_URL env is referenced okay")
     try {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/home`
       const res = await fetch(backend_url, {
@@ -40,63 +42,52 @@ export default function HomeFeedPage() {
     }
   };
 
-  // check if we are authenicated
-  const checkAuth = async () => {
-    Auth.currentAuthenticatedUser({
-      // Optional, By default is false. 
-      // If set to true, this call will send a 
-      // request to Cognito to get the latest user data
-      bypassCache: false
-    })
-      .then((user) => {
-        console.log('user',user);
-        return Auth.currentAuthenticatedUser()
-      }).then((cognito_user) => {
-        setUser({
-          display_name: cognito_user.attributes.name,
-          handle: cognito_user.attributes.preferred_username
-        })
-      })
-      .catch((err) => console.log(err));
-  };
 
-  // check when the page loads if we are authenicated
-  React.useEffect(() => {
-    loadData();
-    checkAuth();
-  }, [])
 
-  React.useEffect(() => {
+  React.useEffect(()=>{
     //prevents double call
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
+    const tracer = trace.getTracer();
+    const rootSpan = tracer.startActiveSpan('document_load', span => {
+      //start span when navigating to page
+      span.setAttribute('pageUrlwindow', window.location.href);
+      window.onload = (event) => {
+        // ... do loading things
+        // ... attach timing information
+        span.end(); //once page is loaded, end the span
+      };
+    
+    });
+
     loadData();
-    checkAuth();
+    // check if we are authenicated
+    checkAuth(setUser);
   }, [])
 
   return (
     <article>
       <DesktopNavigation user={user} active={'home'} setPopped={setPopped} />
       <div className='content'>
-        <ActivityForm
+        <ActivityForm  
           user_handle={user}
           popped={popped}
-          setPopped={setPopped}
-          setActivities={setActivities}
+          setPopped={setPopped} 
+          setActivities={setActivities} 
         />
-        <ReplyForm
-          activity={replyActivity}
-          popped={poppedReply}
-          setPopped={setPoppedReply}
-          setActivities={setActivities}
-          activities={activities}
+        <ReplyForm 
+          activity={replyActivity} 
+          popped={poppedReply} 
+          setPopped={setPoppedReply} 
+          setActivities={setActivities} 
+          activities={activities} 
         />
-        <ActivityFeed
-          title="Home"
-          setReplyActivity={setReplyActivity}
-          setPopped={setPoppedReply}
-          activities={activities}
+        <ActivityFeed 
+          title="Home" 
+          setReplyActivity={setReplyActivity} 
+          setPopped={setPoppedReply} 
+          activities={activities} 
         />
       </div>
       <DesktopSidebar user={user} />
